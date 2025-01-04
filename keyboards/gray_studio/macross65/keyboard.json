@@ -1,11 +1,11 @@
 {
-    "keyboard_name": "Space65R3",
-    "url": "https://graystudio.site/en/works/space65r3/",
+    "keyboard_name": "macross65",
+    "url": "",
     "maintainer": "edwardslau",
-    "manufacturer": "GrayStudio",
+    "manufacturer":"GrayStudio",
     "usb": {
-        "vid": "0x4753",
-        "pid": "0x3003",
+        "vid":"0x4753",
+        "pid":"0x2465",
         "device_version": "0.0.3"
     },
     "ws2812": {
@@ -14,8 +14,8 @@
     "rgblight": {
         "saturation_steps": 8,
         "brightness_steps": 8,
-        "led_count": 5,
-        "max_brightness": 200,
+        "led_count": 23,
+        "max_brightness": 150,
         "sleep": true,
         "animations": {
             "breathing": true,
@@ -38,12 +38,12 @@
         }
     },
     "matrix_pins": {
-        "cols": ["A3", "A5", "A4", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "A15", "B0", "A8", "B15", "B14", "B13"],
-        "rows": ["A6", "B12", "A2", "A0", "A1"]
+        "cols": ["A3", "B4", "A8", "B15", "B14", "B13", "C15", "C14", "C13", "A4", "A5", "B9", "B8", "B7", "B6", "B5"],
+        "rows": ["A6", "B12", "A2", "A1", "A0"]
     },
     "diode_direction": "COL2ROW",
-    "processor": "STM32F103",
-    "bootloader": "stm32duino",
+    "processor": "STM32F072",
+    "bootloader": "stm32-dfu",
     "community_layouts": ["65_ansi_blocker", "65_iso_blocker"],
     "layouts": {
         "LAYOUT": {
@@ -114,10 +114,11 @@
 
                 {"matrix": [4, 0], "x": 0, "y": 4, "w": 1.25},
                 {"matrix": [4, 1], "x": 1.25, "y": 4, "w": 1.25},
-                {"matrix": [4, 3], "x": 2.5, "y": 4, "w": 1.25},
+                {"matrix": [4, 2], "x": 2.5, "y": 4, "w": 1.25},
                 {"matrix": [4, 7], "x": 3.75, "y": 4, "w": 6.25},
                 {"matrix": [4, 10], "x": 10, "y": 4, "w": 1.25},
                 {"matrix": [4, 11], "x": 11.25, "y": 4, "w": 1.25},
+
                 {"matrix": [4, 13], "x": 13, "y": 4},
                 {"matrix": [4, 14], "x": 14, "y": 4},
                 {"matrix": [4, 15], "x": 15, "y": 4}
@@ -189,10 +190,11 @@
 
                 {"matrix": [4, 0], "x": 0, "y": 4, "w": 1.25},
                 {"matrix": [4, 1], "x": 1.25, "y": 4, "w": 1.25},
-                {"matrix": [4, 3], "x": 2.5, "y": 4, "w": 1.25},
+                {"matrix": [4, 2], "x": 2.5, "y": 4, "w": 1.25},
                 {"matrix": [4, 7], "x": 3.75, "y": 4, "w": 6.25},
                 {"matrix": [4, 10], "x": 10, "y": 4, "w": 1.25},
                 {"matrix": [4, 11], "x": 11.25, "y": 4, "w": 1.25},
+
                 {"matrix": [4, 13], "x": 13, "y": 4},
                 {"matrix": [4, 14], "x": 14, "y": 4},
                 {"matrix": [4, 15], "x": 15, "y": 4}
@@ -265,7 +267,7 @@
 
                 {"matrix": [4, 0], "x": 0, "y": 4, "w": 1.25},
                 {"matrix": [4, 1], "x": 1.25, "y": 4, "w": 1.25},
-                {"matrix": [4, 3], "x": 2.5, "y": 4, "w": 1.25},
+                {"matrix": [4, 2], "x": 2.5, "y": 4, "w": 1.25},
                 {"matrix": [4, 7], "x": 3.75, "y": 4, "w": 6.25},
                 {"matrix": [4, 10], "x": 10, "y": 4, "w": 1.25},
                 {"matrix": [4, 11], "x": 11.25, "y": 4, "w": 1.25},
