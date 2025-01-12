@@ -23,8 +23,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,       KC_BRID,      KC_BRIU,     KC_NO,       KC_NO,       RGB_VAD,     RGB_VAI,     KC_MPRV,     KC_MPLY,     KC_MNXT,    KC_MUTE,      KC_VOLD,      KC_VOLU,    LCA(KC_DEL), KC_NO,
         RGB_TOG,       _______,      _______,     _______,     _______,     _______,     _______,     _______,     _______,     _______,    _______,      TO(4),        TO(3),      TO(0),
         KC_CAPS,       RGB_MOD,      RGB_HUI,     RGB_SAI,     RGB_VAI,     RGB_SPI,     _______,     _______,     _______,     _______,    _______,      _______,                  _______,
-        QK_MAGIC_GUI_OFF,            RGB_RMOD,    RGB_HUD,     RGB_SAD,     RGB_VAD,     RGB_SPD,     NK_TOGG,     _______,     _______,    _______,      _______,                  _______,     KC_NO,
-        QK_MAGIC_SWAP_LALT_LGUI,QK_MAGIC_GUI_ON,QK_MAGIC_UNSWAP_LALT_LGUI,  _______,                                                        _______,      _______,      _______,    _______
+        GU_OFF,                      RGB_RMOD,    RGB_HUD,     RGB_SAD,     RGB_VAD,     RGB_SPD,     NK_ON,       NK_OFF,      _______,    _______,      _______,                  _______,     KC_NO,
+        AG_LSWP,       GU_ON,        AG_LNRM,                               _______,                                                        _______,      _______,      _______,    _______
         ),
 
     [3] = LAYOUT(
