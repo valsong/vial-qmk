@@ -20,11 +20,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
      [2] = LAYOUT(
-        KC_TRNS,       KC_BRID,      KC_BRIU,     KC_NO,       KC_NO,       RGB_VAD,     RGB_VAI,     KC_MPRV,     KC_MPLY,     KC_MNXT,    KC_MUTE,      KC_VOLD,      KC_VOLU,    LCA(KC_DEL),_______,    KC_TRNS,
-        RGB_TOG,       KC_TRNS,      KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,    KC_TRNS,      TO(4),        TO(3),      TO(0),                  KC_TRNS,
+        TO(0),         KC_BRID,      KC_BRIU,     KC_NO,       KC_NO,       RGB_VAD,     RGB_VAI,     KC_MPRV,     KC_MPLY,     KC_MNXT,    KC_MUTE,      KC_VOLD,      KC_VOLU,    LCA(KC_DEL),_______,    KC_TRNS,
+        RGB_TOG,       KC_TRNS,      KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,    KC_TRNS,      KC_TRNS,      TO(3),      TO(4),                  KC_TRNS,
         KC_CAPS,       RGB_MOD,      RGB_HUI,     RGB_SAI,     RGB_VAI,     RGB_SPI,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,    KC_TRNS,      KC_TRNS,                  KC_TRNS,                KC_TRNS,
-        GU_OFF,        _______,      RGB_RMOD,    RGB_HUD,     RGB_SAD,     RGB_VAD,     RGB_SPD,     NK_ON,       NK_OFF,      KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,                KC_TRNS,
-        AG_LSWP,       GU_ON,        AG_LNRM,                               KC_TRNS,                                                        KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,                KC_TRNS
+        GU_ON,         _______,      RGB_RMOD,    RGB_HUD,     RGB_SAD,     RGB_VAD,     RGB_SPD,     NK_ON,       NK_OFF,      KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,                KC_TRNS,
+        AG_LNRM,       GU_OFF,       AG_LSWP,                               KC_TRNS,                                                        KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,                KC_TRNS
         ),
 
      [3] = LAYOUT(
@@ -44,18 +44,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         )
 
 };
-const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0,1, HSV_WHITE}
-);
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_capslock_layer
-);
-
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-    rgblight_layers = my_rgb_layers;
-}
-bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(0, led_state.caps_lock);
-    return true;
-}
+//const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//    {0,1, HSV_WHITE}
+//);
+//const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+//    my_capslock_layer
+//);
+//
+//void keyboard_post_init_user(void) {
+//    // Enable the LED layers
+//    rgblight_layers = my_rgb_layers;
+//}
+//bool led_update_user(led_t led_state) {
+//    rgblight_set_layer_state(0, led_state.caps_lock);
+//    return true;
+//}
