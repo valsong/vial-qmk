@@ -9,7 +9,8 @@
         "device_version": "0.0.3"
     },
     "ws2812": {
-        "pin": "B10"
+        "pin": "B10",
+        "driver": "pwm"
     },
     "rgblight": {
         "saturation_steps": 8,

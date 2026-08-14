@@ -23,6 +23,15 @@
 
 #define CH_CFG_ST_FREQUENCY 10000
 
+/*
+ * 设为 0 关闭 tickless 模式，系统时基改用 ARM 硬件 SysTick（PERIODIC 模式），
+ * 从而释放 TIM2 给 WS2812 PWM 驱动（PB10 = TIM2_CH3）。
+ * 默认值为 2（tickless freerunning，需占用一个 32 位定时器 TIM2）。
+ * 参考 STM32_F103_STM32DUINO / GENERIC_WB32 同样使用 0。
+ * 代价：idle 线程无法进入 tickless 深睡，功耗略增；调度为周期 tick。
+ */
+#define CH_CFG_ST_TIMEDELTA 0
+
 #define CH_CFG_OPTIMIZE_SPEED FALSE
 
 #define CH_CFG_USE_CONDVARS_TIMEOUT FALSE

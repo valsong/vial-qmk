@@ -11,23 +11,38 @@
 #define DEBOUNCE 10
 
 /*
- * WS2812 bitbang 时序补偿系数（已实测验证）
+ * WS2812 PWM 驱动配置（替代 bitbang，根治 GCC 版本时序依赖）
  *
- * 背景：bitbang 驱动用一个 NOP 循环来产生 WS2812 所需的纳秒级时序，
- * FUDGE 用于把"循环计数"换算成真实纳秒，默认值 0.4（仅对 STM32F0/F1/F3/F4
- * 等系列自动生效，见 platforms/chibios/drivers/ws2812_bitbang.c）。
+ * 背景：原用 bitbang 驱动，其 NOP 循环时序依赖 arm-none-eabi-gcc 的代码生成
+ * 行为。ChibiOS 升级到 21.11.x 配套 GCC 15.3.1 后，循环控制指令被优化得更
+ * 少，导致 T1H 变短、LED 常亮白色（见原 bitbang 方案的 FUDGE 注释历史）。
+ * 现改用 PWM + DMA 硬件产生 WS2812 时序，时序由定时器决定，与编译器无关。
  *
- * 问题：本键盘 MCU 为 STM32F072，在 ChibiOS 21.11.x（由旧版 q3-8 升级到 q3-533）
- * 下，编译器优化与调度器行为变化使 NOP 循环执行变快，默认 0.4 会让：
- *   T1H（表示 "1" 的高电平）≈ 580ns，低于 WS2812 协议最低值 750ns。
- * 结果 LED 无法正确识别 "1" 位，所有 bit 被当 "0" 解析，表现为常亮白色、
- * 无法调节、无法关闭。
+ * 引脚/外设映射（STM32F072 数据手册）：
+ *   - WS2812_DI_PIN = PB10 = TIM2_CH3（数据手册与 ChibiOS board.h 一致：
+ *     #define GPIOB_TIM2_CH3 10U）
+ *   - 使用 PWMD2（TIM2），通道 3
+ *   - TIM2 更新事件(TIM2_UP)的 DMA 请求固定映射到 DMA1 通道2
+ *     （STM32F072 参考手册 DMA1 通道请求表），无 DMAMUX，硬件固定。
+ *   - AF 模式号：F072 下 TIM2 各通道 AF=2（USE_GPIOV1 → PAL_MODE_ALTERNATE(2)）
  *
- * 实测：0.4 复现上述白色故障；0.25 可把 T1H 拉回约 900ns，恢复正常。
- *
- * 维护提示：
- *   - 这是与 ChibiOS 版本/工具链相关的时序 hack，升级 ChibiOS 后需重新实测，
- *     优先尝试删除本行回落默认 0.4，灯效正常则可删；异常则保留并微调。
- *   - 仅在 bitbang 驱动下生效，若改用 SPI/PWM 等其他 WS2812 驱动应移除。
+ * 配套：mcuconf.h 里已 STM32_PWM_USE_TIM2 TRUE。
+ * 若回退到 bitbang：删本段 + keyboard.json 的 "driver":"pwm" + mcuconf.h，
+ *   并恢复下方的 WS2812_BITBANG_NOP_FUDGE 0.25。
  */
-#define WS2812_BITBANG_NOP_FUDGE 0.25
+#define WS2812_PWM_DRIVER PWMD2
+#define WS2812_PWM_CHANNEL 3
+#define WS2812_PWM_PAL_MODE 2
+#define WS2812_PWM_DMA_STREAM STM32_DMA1_STREAM2
+#define WS2812_PWM_DMA_CHANNEL 2
+
+/*
+ * [已废弃] bitbang 时序补偿系数 —— 已改用 PWM 硬件驱动，此配置不再生效。
+ * 完整保留作为回退参考与历史记录：若 PWM 方案不可用需回退 bitbang，取消
+ * 下面注释，并删掉上方的 PWM 配置 + keyboard.json 的 driver 字段 +
+ * mcuconf.h 的 TIM2 开启 + halconf.h 的 HAL_USE_PWM + chconf.h 的 TIMEDELTA=0。
+ *   根因：arm-none-eabi-gcc 15.3.1 下 -Os 使 wait_ns 的 for+nop 循环控制开销
+ *   变小，默认 0.4 致 T1H≈580ns 低于 WS2812 最低 750ns，LED 常亮白色。
+ *   实测 0.25 可把 T1H 拉回约 900ns。
+ */
+// #define WS2812_BITBANG_NOP_FUDGE 0.25
