@@ -44,6 +44,9 @@
     "diode_direction": "COL2ROW",
     "processor": "STM32F072",
     "bootloader": "stm32-dfu",
+    "build": {
+        "debounce_type": "sym_defer_pk"
+    },
     "community_layouts": ["65_ansi_blocker", "65_iso_blocker"],
     "layouts": {
         "LAYOUT": {

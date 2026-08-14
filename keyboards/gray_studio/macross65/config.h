@@ -7,6 +7,9 @@
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
+/**延长消除抖动时间**/
+#define DEBOUNCE 10
+
 /*
   1. 新版 ChibiOS（从 q3-8 升级到 q3-533）的编译器优化或调度器行为发生了变化，导致 NOP 循环执行速度比旧版快了
   2. NOP_FUDGE = 0.4 这个补偿系数没有跟着更新，它控制的是 bitbang 时序里每个"等待 1ns"对应多少个 NOP 循环
